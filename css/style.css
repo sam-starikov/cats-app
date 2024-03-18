@@ -1,0 +1,15 @@
+/* setup */
+@import url('./setup/reset.css');
+@import url('./setup/vars.css');
+@import url('./setup/base.css');
+
+/* blocks */
+@import url('./blocks/page.css');
+@import url('./blocks/container.css');
+@import url('./blocks/header.css');
+@import url('./blocks/main.css');
+@import url('./blocks/footer.css');
+@import url('./blocks/btn.css');
+@import url('./blocks/logo.css');
+@import url('./blocks/cards.css');
+@import url('./blocks/card.css');

@@ -1,0 +1,13 @@
+.btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 20px;
+    border-radius: 10px;
+    background-color: var(--accent-color);
+    transition: background-color var(--fast) ease-in-out;
+}
+
+.btn:hover{
+    background-color: var(--secondary-color);
+}

@@ -1,0 +1,12 @@
+:root {
+  --bg-main-color: rgb(241, 242, 246);
+  --text-main-color: rgb(47, 53, 66);
+  --text-secondary-color: rgb(116, 125, 140);
+  --header-bg-color:rgb(241, 242, 246);
+  --form-color: rgb(206, 214, 224);
+  --accent-color: rgb(46, 213, 115);
+  --primary-color: rgb(255, 165, 2);
+  --secondary-color: rgb(255, 127, 80);
+
+  --fast: 0.25s;
+}

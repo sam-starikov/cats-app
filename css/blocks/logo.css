@@ -1,0 +1,8 @@
+.logo {
+  font-size: 25px;
+  transition: color var(--fast) ease-in-out;
+}
+
+.logo:hover {
+  color: var(--accent-color);
+}
