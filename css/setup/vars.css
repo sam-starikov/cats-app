@@ -1,9 +1,12 @@
 :root {
-  --bg-main-color: rgb(241, 242, 246);
+  --bg-main-color: rgb(112, 162, 255, 0.41);
   --text-main-color: rgb(47, 53, 66);
   --text-secondary-color: rgb(116, 125, 140);
-  --header-bg-color:rgb(241, 242, 246);
-  --form-color: rgb(206, 214, 224);
+  --header-bg-color: rgb(241, 242, 246);
+  --popup-overlay-bg: rgb(87, 96, 111, 0.5);
+
+  --form-color: rgb(255, 255, 255, 0.9);
+  --input-border: rgb(164, 176, 190);
   --accent-color: rgb(46, 213, 115);
   --primary-color: rgb(255, 165, 2);
   --secondary-color: rgb(255, 127, 80);

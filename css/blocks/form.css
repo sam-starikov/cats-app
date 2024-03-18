@@ -1,0 +1,58 @@
+.form {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.form__img {
+  grid-row: span 3;
+  background-image: url(../../assets/img/guitar-1.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.form__input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--input-border);
+}
+
+.form__input::placeholder {
+}
+
+.form__textarea {
+  grid-row: span 2;
+  resize: none;
+  height: 100%;
+}
+
+.form__checkbox-wrapper {
+  position: relative;
+}
+
+.form__checkbox-real {
+  appearance: none;
+  position: absolute;
+}
+
+.form__checkbox-wrapper:focus {
+  outline: auto;
+}
+
+.form__checkbox-real:checked ~ .form__checkbox-fake,
+.form__checkbox-real:checked ~ .form__label {
+  color: var(--primary-color);
+}
+
+.form__label {
+}
+
+.form__checkbox-fake {
+}
+
+.form__img-input {
+}
+
+.form__btn {
+}

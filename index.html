@@ -14,14 +14,55 @@
 <body class="page">
     <header class="header">
         <div class="header__container container">
-            <a href="#!" class="header__logo logo">catsApp</a>
-            <button class="btn" id="add">Добавить</button>
+            <a href="#!" class="header__logo logo">guitar-App</a>
+            <button class="btn" id="add">Add</button>
         </div>
     </header>
     <main class="main container">
-        <section class="cards"></section>
+        <section class="cards" style="display: none;">
+            <h2 class="visually-hidden">Список</h2>
+            <div class="card">
+                <img class="card__img" src="./assets/img/guitar-1.jpg" alt="Изображение">
+                <a href="#!" class="card__link">
+                    <h3 class="card__name">Item</h3>
+                </a>
+                <button class="card__like" aria-label="Поставить лайк">like!</button>
+            </div>
+        </section>
     </main>
-    <footer class="footer"></footer>
+    <footer class="footer" style="display: none;">
+        <div class="footer__container container">
+            <div class="footer__copyright">
+                <a href="#!">&#169 Sam Starikov 2024</a>
+            </div>
+            <div class="footer__socials">
+                <div class="footer__icon"><a href="#!" class="footer__link">icon</a></div>
+                <div class="footer__icon"><a href="#!" class="footer__link">icon</a></div>
+                <div class="footer__icon"><a href="#!" class="footer__link">icon</a></div>
+            </div>
+        </div>
+    </footer>
+    <div class="popup">
+        <div class="popup__container">
+            <button class="popup__btn btn">X</button>
+            <h2 class="popup__title">Add guitar</h2>
+            <form action="" class="form" id="popup-form-cat">
+                <div class="form__img"></div>
+                <input class="form__input" type="number" min="1" name="id" placeholder="id" required>
+                <input class="form__input" type="number" name="age" placeholder="Age">
+                <input class="form__input" type="text" name="model" placeholder="Model" required>
+                <input class="form__input" type="number" min="0" max="10" name="rating" placeholder="Rating (0-10)">
+                <textarea class="form__input form__textarea" name="description" placeholder="Description" ></textarea>
+                <label class="form__checkbox-wrapper">
+                    <input class="form__checkbox-real" type="checkbox" name="favorite" >
+                    <span class="form__label">Favorite</span>
+                    <!-- <span class="form__checkbox-fake" aria-hidden="true">(icon)</span> -->
+                </label>
+                <input class="form__input form__img-input" type="url" name="img-link" placeholder="URL to image" >
+                <button class="form__btn btn">Add to item</button>
+            </form>
+        </div>
+    </div>
 </body>
 
 </html>
