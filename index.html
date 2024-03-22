@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nosifer&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
-    <title>catsApp</title>
+    <title>guitar-app</title>
 </head>
 
 <body class="page">
@@ -19,18 +19,12 @@
         </div>
     </header>
     <main class="main container">
-        <section class="cards" style="display: none;">
+        <section class="cards">
             <h2 class="visually-hidden">Список</h2>
-            <div class="card">
-                <img class="card__img" src="./assets/img/guitar-1.jpg" alt="Изображение">
-                <a href="#!" class="card__link">
-                    <h3 class="card__name">Item</h3>
-                </a>
-                <button class="card__like" aria-label="Поставить лайк">like!</button>
-            </div>
+
         </section>
     </main>
-    <footer class="footer" style="display: none;">
+    <footer class="footer">
         <div class="footer__container container">
             <div class="footer__copyright">
                 <a href="#!">&#169 Sam Starikov 2024</a>
@@ -52,17 +46,31 @@
                 <input class="form__input" type="number" name="age" placeholder="Age">
                 <input class="form__input" type="text" name="model" placeholder="Model" required>
                 <input class="form__input" type="number" min="0" max="10" name="rating" placeholder="Rating (0-10)">
-                <textarea class="form__input form__textarea" name="description" placeholder="Description" ></textarea>
+                <textarea class="form__input form__textarea" name="description" placeholder="Description"></textarea>
                 <label class="form__checkbox-wrapper">
-                    <input class="form__checkbox-real" type="checkbox" name="favorite" >
+                    <input class="form__checkbox-real" type="checkbox" name="favorite">
                     <span class="form__label">Favorite</span>
-                    <!-- <span class="form__checkbox-fake" aria-hidden="true">(icon)</span> -->
+                    <span class="form__checkbox-fake" aria-hidden="true">(icon)</span>
                 </label>
-                <input class="form__input form__img-input" type="url" name="img-link" placeholder="URL to image" >
+                <input class="form__input form__img-input" type="url" name="img-link" placeholder="URL to image">
                 <button class="form__btn btn">Add to item</button>
             </form>
         </div>
     </div>
+
+    <template id="card-template">
+        <div class="card">
+            <img class="card__img" src="#!" alt="Изображение">
+            <a href="#!" class="card__link">
+                <h3 class="card__name"></h3>
+            </a>
+            <button class="card__like" aria-label="Поставить лайк">like!</button>
+        </div>
+    </template>
+    
+    <script src="./cats.js" defer></script>
+    <script src="./card.js" defer></script>
+    <script src="./script.js" defer></script>
 </body>
 
 </html>

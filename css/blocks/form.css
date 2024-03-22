@@ -36,8 +36,9 @@
   position: absolute;
 }
 
-.form__checkbox-wrapper:focus {
-  outline: auto;
+.form__checkbox-real:focus ~ .form__checkbox-fake,
+.form__checkbox-real:focus ~ .form__label {
+  color: var(--secondary-color);
 }
 
 .form__checkbox-real:checked ~ .form__checkbox-fake,
