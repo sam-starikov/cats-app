@@ -36,11 +36,5 @@ class Popup {
   }
 }
 
-const popupAddCatInstansce = new Popup('popup-add-cat')
-const btnOpenPopupForm = document.querySelector('#add-cat-form')
-
-btnOpenPopupForm.addEventListener('click', () => popupAddCatInstansce.open())
-popupAddCatInstansce.setEventListener()
-
 // popupAddCatInstansce.open()
 // popupAddCatInstansce.close()

@@ -40,19 +40,19 @@
         <div class="popup__container">
             <button class="popup__btn btn">X</button>
             <h2 class="popup__title">Add guitar</h2>
-            <form action="" class="form" id="popup-form-cat">
+            <form method="post" class="form" id="popup-form-cat">
                 <div class="form__img"></div>
                 <input class="form__input" type="number" min="1" name="id" placeholder="id" required>
                 <input class="form__input" type="number" name="age" placeholder="Age">
-                <input class="form__input" type="text" name="model" placeholder="Model" required>
-                <input class="form__input" type="number" min="0" max="10" name="rating" placeholder="Rating (0-10)">
+                <input class="form__input" type="text" name="name" placeholder="Model" required>
+                <input class="form__input" type="number" min="0" max="10" name="rate" placeholder="Rating (0-10)">
                 <textarea class="form__input form__textarea" name="description" placeholder="Description"></textarea>
                 <label class="form__checkbox-wrapper">
-                    <input class="form__checkbox-real" type="checkbox" name="favorite">
+                    <input class="form__checkbox-real" type="checkbox" name="favourite">
                     <span class="form__label">Favorite</span>
                     <span class="form__checkbox-fake" aria-hidden="true">(icon)</span>
                 </label>
-                <input class="form__input form__img-input" type="url" name="img-link" placeholder="URL to image">
+                <input class="form__input form__img-input" type="url" name="img_link" placeholder="URL to image">
                 <button class="form__btn btn">Add to item</button>
             </form>
         </div>
@@ -60,7 +60,7 @@
 
     <template id="card-template">
         <div class="card">
-            <img class="card__img" src="#!" alt="Изображение">
+            <img class="card__img" src="" alt="Изображение">
             <a href="#!" class="card__link">
                 <h3 class="card__name"></h3>
             </a>
