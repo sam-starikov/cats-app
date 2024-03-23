@@ -4,7 +4,7 @@ const cats = [
         "img_link": "https://www.friendforpet.ru/api/sites/default/files/2021-09/167200DD-A44F-4845-8D4D-ACCFC180165A.jpeg",
         "age": 8,
         "rate": 7,
-        "favourite": false,
+        "favourite": true,
         "description": "Лара – шотландская вислоухая, у нее остеохондродисплазия. Лара спокойная, очень ласковая и контактная. Болезнь не лечится и специального ухода не нужно.",
         "id": 1
     },
