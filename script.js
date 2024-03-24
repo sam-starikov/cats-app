@@ -4,11 +4,19 @@ const btnOpenPopupForm = document.querySelector('#add-cat-form')
 const formAddCat = document.querySelector('#popup-form-cat')
 const popupAddCatInstansce = new Popup('popup-add-cat')
 
-cats.forEach(obj => {
-  const cardInstance = new Card(obj, '#card-template')
-  const newCardElem = cardInstance.getElement()
-  cardContainer.append(newCardElem)
-})
+// cats.forEach(obj => {
+// const cardInstance = new Card(obj, '#card-template')
+// const newCardElem = cardInstance.getElement()
+// cardContainer.append(newCardElem)
+// })
+
+api.getData().then(data =>
+  data.forEach(obj => {
+    const cardInstance = new Card(obj, '#card-template')
+    const newCardElem = cardInstance.getElement()
+    cardContainer.append(newCardElem)
+  })
+)
 
 function handleFormAddCat(event) {
   event.preventDefault()
@@ -18,7 +26,7 @@ function handleFormAddCat(event) {
   const cardInstance = new Card(dataFromForm, '#card-template')
   const newCardElem = cardInstance.getElement()
   cardContainer.append(newCardElem)
-  console.log(dataFromForm)
+  api.addNewObj(dataFromForm)
 }
 
 function serializaForm(elements) {
@@ -40,3 +48,4 @@ popupAddCatInstansce.setEventListener()
 btnOpenPopupForm.addEventListener('click', () => popupAddCatInstansce.open())
 // Важно, submit на Форму а не click на кнопку
 formAddCat.addEventListener('submit', handleFormAddCat)
+
