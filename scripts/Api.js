@@ -9,16 +9,38 @@ class Api {
     this._headers = config.headers
   }
 
-  getData() {
-    return fetch(`${this._url}/data`).then(resp => resp.json())
+  _onResponse(resp) {
+    return resp.ok ? resp.json() : Promise.reject({ ...resp, message: 'Ошибка сервера' })
   }
 
+  getAllData() {
+    return fetch(`${this._url}/data`).then(this._onResponse)
+  }
+
+  //допилить
+  /*  getById(id) {
+    return fetch(`${this._url}/data/${id}`).then(resp => resp.json())
+  } */
+
   addNewObj(data) {
-    fetch(`${this._url}/data`, {
+    return fetch(`${this._url}/data`, {
       method: 'POST',
       body: JSON.stringify(data),
       headers: this._headers,
-      
+    })
+  }
+
+  updateById(id, data) {
+    fetch(`${this._url}/data/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+      headers: this._headers,
+    })
+  }
+
+  deleteById(id) {
+    fetch(`${this._url}/data/${id}`, {
+      method: 'DELETE',
     })
   }
 }

@@ -12,14 +12,16 @@ class Popup {
   }
 
   open() {
-    document.addEventListener('keyup', this._handleEscClose)
     this.popup.classList.add('popup_active')
     this.popup.querySelector('.form__input').focus()
+    // сайд эффект
+    document.addEventListener('keyup', this._handleEscClose)
   }
 
   close() {
-    document.removeEventListener('keyup', this._handleEscClose)
     this.popup.classList.remove('popup_active')
+    // сайд эффект
+    document.removeEventListener('keyup', this._handleEscClose)
   }
 
   setEventListener() {

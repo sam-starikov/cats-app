@@ -6,7 +6,7 @@
   overflow: hidden;
 }
 
-.card__name{
+.card__name {
   font-size: 26px;
 }
 
@@ -17,14 +17,16 @@
   left: 0;
   right: 0;
   bottom: 0;
-  transition-property: backdrop-filter;
+  transition-property: backdrop-filter, background-color;
   transition-duration: var(--fast);
   transition-timing-function: ease-in-out;
   backdrop-filter: blur(1px);
+  background-color: rgba(240, 248, 255, 0.4);
 }
 
 .card:hover::after {
   backdrop-filter: blur(0px);
+  background-color: unset;
 }
 
 .card__img {
@@ -49,8 +51,8 @@
   color: var(--secondary-color);
 }
 
-.card__delete{
-    position: absolute;
+.card__delete {
+  position: absolute;
   top: 20px;
   left: 20px;
   z-index: 10;
