@@ -38,10 +38,20 @@ function serializaForm(elements) {
     return formData
 }
 
+function setDataRefresh(minutes) {
+    const setTime = new Date(new Date().getTime() + minutes * 60000)
+    localStorage.setItem('catsRefreshData', setTime)
+}
+
+function isTimeExpire(localStorageTimeData) {
+    return new Date() < new Date(localStorageTimeData)
+}
+
 function checkLocalStorage() {
     const dataLocalStorage = JSON.parse(localStorage.getItem('cats'))
+    const getTimeExpires = localStorage.getItem('catsRefreshData')
 
-    if (dataLocalStorage && dataLocalStorage.length) {
+    if (dataLocalStorage && dataLocalStorage.length && isTimeExpire(getTimeExpires)) {
         dataLocalStorage.forEach(obj => {
             createNewItem(obj)
         })
@@ -51,6 +61,7 @@ function checkLocalStorage() {
                 createNewItem(obj)
             })
             localStorage.setItem('cats', JSON.stringify(data))
+            setDataRefresh(1)
         })
     }
 }
