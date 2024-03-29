@@ -1,4 +1,4 @@
-class Card {
+export class Card {
     constructor(data, selectorTemplate) {
         this._data = data
         this._selectorTemplate = selectorTemplate

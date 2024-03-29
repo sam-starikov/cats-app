@@ -4,7 +4,7 @@
     --text-secondary-color: rgb(116, 125, 140);
     --header-bg-color: rgb(241, 242, 246);
     --footer-bg-color: rgb(241, 242, 246);
-    --popup-overlay-bg: rgb(87, 96, 111, 0.5);
+    --popup-overlay-bg: rgba(87, 96, 111, 0.8);
 
     --form-color: rgb(255, 255, 255);
     --input-border: rgb(164, 176, 190);

@@ -1,42 +1,34 @@
-class Popup {
-  constructor(className) {
-    this._className = `.${className}`
-    this.popup = document.querySelector(this._className)
-    this._handleEscClose = this._handleEscClose.bind(this)
-  }
-
-  _handleEscClose(event) {
-    if (event.key === 'Escape') {
-      this.close()
+export class Popup {
+    constructor(className) {
+        this._className = `.${className}`
+        this.popup = document.querySelector(this._className)
+        this._handleEscClose = this._handleEscClose.bind(this)
     }
-  }
 
-  open() {
-    this.popup.classList.add('popup_active')
-    this.popup.querySelector('.form__input').focus()
-    // сайд эффект
-    document.addEventListener('keyup', this._handleEscClose)
-  }
+    _handleEscClose(event) {
+        if (event.key === 'Escape') {
+            this.close()
+        }
+    }
 
-  close() {
-    this.popup.classList.remove('popup_active')
-    // сайд эффект
-    document.removeEventListener('keyup', this._handleEscClose)
-  }
+    open() {
+        this.popup.classList.add('popup_active')
+        this.popup.querySelector('.form__input').focus()
+        // сайд эффект
+        document.addEventListener('keyup', this._handleEscClose)
+    }
 
-  setEventListener() {
-    this.popup.addEventListener('click', event => {
-      if (event.target.classList.contains('popup-add-cat') || !!event.target.closest('.popup__btn')) {
+    close() {
         this.popup.classList.remove('popup_active')
-      }
-    })
-    // this.popup.addEventListener('keyup', event => {
-    //   if (event.key === 'Escape') {
-    //     this.popup.classList.remove('popup_active')
-    //   }
-    // })
-  }
-}
+        // сайд эффект
+        document.removeEventListener('keyup', this._handleEscClose)
+    }
 
-// popupAddCatInstansce.open()
-// popupAddCatInstansce.close()
+    setEventListener() {
+        this.popup.addEventListener('click', event => {
+            if (event.target.classList.contains('popup') || !!event.target.closest('.popup__btn')) {
+                this.popup.classList.remove('popup_active')
+            }
+        })
+    }
+}

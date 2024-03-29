@@ -1,10 +1,25 @@
 //клиентский код
-const cardContainer = document.querySelector('.cards')
-const btnOpenPopupForm = document.querySelector('#add-cat-form')
-const formAddCat = document.querySelector('#popup-form-cat')
-const popupAddCatInstansce = new Popup('popup-add-cat')
-const btnFormAdd = document.querySelector('.form__btn')
 
+/* Imports es6 module */
+import { api } from './scripts/Api.js'
+import { Card } from './scripts/Card.js'
+import { Popup } from './scripts/Popup.js'
+
+/* Variables */
+const cardContainer = document.querySelector('.cards')
+const formAddCat = document.querySelector('#popup-form-cat')
+const formLogin = document.querySelector('#popup-form-login')
+
+const btnOpenPopupForm = document.querySelector('#add-cat-form')
+const btnOpenPopupLogin = document.querySelector('#login-btn')
+
+const popupAddCatInstansce = new Popup('popup-add-cat')
+const popupLoginInstansce = new Popup('popup-login')
+
+let isAuth = !!Cookies.get('email')
+/*  */
+
+/* Functions */
 function createNewItem(newDataObj) {
     const cardInstance = new Card(newDataObj, '#card-template')
     const newCardElem = cardInstance.getElement()
@@ -16,7 +31,7 @@ function createNewItem(newDataObj) {
 
 function handleAddFormCat(event) {
     const elementsFormCat = [...formAddCat.elements]
-    const dataFromForm = serializaForm(elementsFormCat)
+    const dataFromForm = serializeForm(elementsFormCat)
     api.addNewObj(dataFromForm).then(() => {
         createNewItem(dataFromForm)
         popupAddCatInstansce.close()
@@ -24,7 +39,19 @@ function handleAddFormCat(event) {
     event.preventDefault()
 }
 
-function serializaForm(elements) {
+function handleLoginForm(event) {
+    const elementsFromLoginForm = [...formLogin.elements]
+    const dataFromForm = serializeForm(elementsFromLoginForm)
+
+    Cookies.set('email', `${dataFromForm.email}`, { expires: setDataRefreshCookies(60) })
+    isAuth = true
+    btnOpenPopupLogin.textContent = setLoginBtnText()
+    popupLoginInstansce.close()
+    checkLocalStorage()
+    event.preventDefault()
+}
+
+function serializeForm(elements) {
     const formData = {}
 
     elements.forEach(input => {
@@ -38,7 +65,12 @@ function serializaForm(elements) {
     return formData
 }
 
-function setDataRefresh(minutes) {
+function setDataRefreshCookies(minutes) {
+    const setTime = new Date(new Date().getTime() + minutes * 60000)
+    return setTime
+}
+
+function setDataRefreshLocalStorage(minutes) {
     const setTime = new Date(new Date().getTime() + minutes * 60000)
     localStorage.setItem('catsRefreshData', setTime)
 }
@@ -61,14 +93,43 @@ function checkLocalStorage() {
                 createNewItem(obj)
             })
             localStorage.setItem('cats', JSON.stringify(data))
-            setDataRefresh(1)
+            setDataRefreshLocalStorage(60)
         })
     }
 }
-checkLocalStorage()
 
+function handleLogOut() {
+    Cookies.remove('email')
+    isAuth = false
+    btnOpenPopupLogin.textContent = setLoginBtnText()
+    popupLoginInstansce.open()
+}
+
+function setLoginBtnText() {
+    return !isAuth ? 'Sign in' : 'Sign Out'
+}
+/*  */
+
+/* Listeners */
 popupAddCatInstansce.setEventListener()
+// popupLoginInstansce.setEventListener()
 
 btnOpenPopupForm.addEventListener('click', () => popupAddCatInstansce.open())
-// Важно, submit на Форму а не click на кнопку
+btnOpenPopupLogin.addEventListener('click', handleLogOut)
+
 formAddCat.addEventListener('submit', handleAddFormCat)
+formLogin.addEventListener('submit', handleLoginForm)
+// Важно, submit на Форму а не click на кнопку
+/*  */
+
+/* Authorization */
+if (!isAuth) {
+    btnOpenPopupLogin.textContent = setLoginBtnText()
+    popupLoginInstansce.open()
+    //!
+    document.removeEventListener('keyup', popupLoginInstansce._handleEscClose)
+} else {
+    btnOpenPopupLogin.textContent = setLoginBtnText()
+    checkLocalStorage()
+}
+/*  */

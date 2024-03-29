@@ -8,14 +8,19 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nosifer&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
-    <title>guitar-app</title>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js" defer></script>
+    <title>lorem-app</title>
 </head>
+
 
 <body class="page">
     <header class="header">
         <div class="header__container container">
-            <a href="#!" class="header__logo logo">guitar-App</a>
-            <button class="btn" id="add-cat-form">Add</button>
+            <a href="#!" class="header__logo logo">lorem</a>
+            <div class="header__controls">
+                <button class="btn" id="add-cat-form">Add item</button>
+                <button class="btn" id="login-btn"></button>
+            </div>
         </div>
     </header>
     <main class="main container">
@@ -27,7 +32,7 @@
     <footer class="footer">
         <div class="footer__container container">
             <div class="footer__copyright">
-                <a href="#!">&#169 Sam Starikov 2024</a>
+                <a href="#!">&#169; Sam Starikov 2024</a>
             </div>
             <div class="footer__socials">
                 <div class="footer__icon"><a href="#!" class="footer__link">icon</a></div>
@@ -39,10 +44,10 @@
     <div class="popup popup-add-cat">
         <div class="popup__container">
             <button class="popup__btn btn">X</button>
-            <h2 class="popup__title">Add guitar</h2>
+            <h2 class="popup__title">lorem</h2>
             <form method="post" class="form" id="popup-form-cat">
                 <!-- <div class="form__img"></div> -->
-                <input class="form__input" type="number" min="1" name="id" placeholder="id">
+                <!-- <input class="form__input" type="number" min="1" name="id" placeholder="id"> -->
                 <input class="form__input" type="number" name="age" placeholder="Age">
                 <input class="form__input" type="text" name="name" placeholder="Name" required>
                 <input class="form__input" type="number" min="0" max="10" name="rate" placeholder="Rating (0-10)">
@@ -58,7 +63,18 @@
             </form>
         </div>
     </div>
-
+    <div class="popup popup-login">
+        <div class="popup__container">
+            <button class="popup__btn btn" id="popup-login-close-btn">X</button>
+            <h2 class="popup__title">Please enter your Login and Password</h2>
+            <form class="form" id="popup-form-login">
+                <input class="form__input" type="email" name="email" placeholder="email" required>
+                <input class="form__input" type="password" name="password" minlength="6" placeholder="password"
+                    required>
+                <button class="form__btn btn">Enter</button>
+            </form>
+        </div>
+    </div>
     <template id="card-template">
         <div class="card">
             <img class="card__img" src="" alt="Изображение">
@@ -69,12 +85,7 @@
             <button class="card__delete" aria-label="Удалить">Delete!</button>
         </div>
     </template>
-
-    <!-- <script src="./scripts/cats.js" defer></script> -->
-    <script src="./scripts/Api.js" defer></script>
-    <script src="./scripts/Card.js" defer></script>
-    <script src="./scripts/Popup.js" defer></script>
-    <script src="./script.js" defer></script>
+    <script src="./script.js" type="module"></script>
 </body>
 
 </html>
