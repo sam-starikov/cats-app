@@ -21,7 +21,10 @@ export class Card {
         const cardImg = this.element.querySelector('.card__img')
         const cardLike = this.element.querySelector('.card__like')
 
-        this._data.favourite ? null : cardLike.remove()
+        // this._data.favourite ? null : cardLike.remove()
+        if (!this._data.favourite) {
+            cardLike.remove()
+        }
         cardTitle.textContent = this._data.name
         cardImg.src = this._data.img_link
 

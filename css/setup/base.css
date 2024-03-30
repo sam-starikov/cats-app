@@ -1,14 +1,9 @@
 html,
 body {
-  font-family: 'Nosifer', sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  line-height: normal;
-  color: var(--text-main-color);
+    font-family: 'Nosifer', sans-serif;
+    color: var(--text-main-color);
 }
 
 a {
-  color: currentColor;
+    color: currentColor;
 }
-
-
