@@ -1,6 +1,6 @@
 const CONFIG_API = {
     url: 'https://6492f092428c3d2035d0f278.mockapi.io',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'content-type': 'application/json' },
 }
 
 class Api {
@@ -25,21 +25,21 @@ class Api {
     addNewObj(data) {
         return fetch(`${this._url}/data`, {
             method: 'POST',
-            body: JSON.stringify(data),
             headers: this._headers,
+            body: JSON.stringify(data),
         })
     }
 
     updateById(id, data) {
         fetch(`${this._url}/data/${id}`, {
             method: 'PUT',
-            body: JSON.stringify(data),
             headers: this._headers,
+            body: JSON.stringify(data),
         })
     }
 
     deleteById(id) {
-        fetch(`${this._url}/data/${id}`, {
+        return fetch(`${this._url}/data/${id}`, {
             method: 'DELETE',
         })
     }

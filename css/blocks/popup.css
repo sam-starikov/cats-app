@@ -37,3 +37,11 @@
 .popup__title {
     font-size: 32px;
 }
+.popup__img-wrap {
+    overflow: hidden;
+}
+
+.popup__img {
+    object-fit: cover;
+    aspect-ratio: 4/3;
+}

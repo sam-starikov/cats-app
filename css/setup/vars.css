@@ -13,4 +13,5 @@
     --secondary-color: rgb(255, 127, 80);
     --delete-btn-color: rgb(252, 63, 29);
     --fast: 0.25s;
+    --shadow: 0px 5px 10px -5px rgba(34, 60, 80, 0.44);
 }

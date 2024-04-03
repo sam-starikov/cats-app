@@ -4,10 +4,21 @@
     border-radius: 10px;
     color: var(--accent-color);
     overflow: hidden;
+    box-shadow: var(--shadow);
+    cursor: pointer;
 }
 
 .card__name {
+    color: var(--primary-color);
     font-size: 26px;
+    font-weight: 700;
+    border-radius: 10px;
+    transition: padding var(--fast) ease-in-out, background-color var(--fast) ease-in-out;
+}
+
+.card__name:hover {
+    padding: 7px 50px;
+    background-color: rgba(220, 239, 255, 0.7);
 }
 
 .card::after {
@@ -20,13 +31,14 @@
     transition-property: backdrop-filter, background-color;
     transition-duration: var(--fast);
     transition-timing-function: ease-in-out;
-    backdrop-filter: blur(1px);
-    background-color: rgba(240, 248, 255, 0.4);
+    backdrop-filter: blur(2px);
+    background-color: rgba(131, 131, 131, 0.5);
+    pointer-events: none;
 }
 
 .card:hover::after {
     backdrop-filter: blur(0px);
-    background-color: unset;
+    background-color: transparent;
 }
 
 .card__img {
@@ -48,7 +60,14 @@
     top: 20px;
     right: 20px;
     z-index: 10;
-    color: var(--secondary-color);
+    color: rgba(197, 0, 23, 0.9);
+    font-size: 24px;
+    transition: color var(--fast) ease-in-out, text-shadow var(--fast) ease-in-out, transform var(--fast) ease-in-out;
+}
+
+.card__like:hover {
+    color: rgba(155, 138, 140, 0.9);
+    transform: scale(1.2);
 }
 
 .card__delete {
@@ -56,5 +75,12 @@
     top: 20px;
     left: 20px;
     z-index: 10;
-    color: var(--delete-btn-color);
+    font-size: 24px;
+    color: rgb(255, 255, 255);
+    transition: color var(--fast) ease-in-out, transform var(--fast) ease-in-out;
+}
+
+.card__delete:hover {
+    color: rgba(0, 0, 0, 0.9);
+    transform: scale(1.2);
 }

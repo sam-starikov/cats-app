@@ -1,49 +1,55 @@
 .form {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
 }
 
 .form__img {
-  grid-row: span 3;
-  background-image: url(../../assets/img/guitar-1.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
+    grid-row: span 3;
+    background-image: url(../../assets/img/guitar-1.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .form__input {
-  width: 100%;
-  padding: 10px;
-  border-radius: 10px;
-  border: 1px solid var(--input-border);
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--input-border);
 }
 
 .form__input::placeholder {
 }
 
 .form__textarea {
-  grid-row: span 2;
-  resize: none;
-  height: 100%;
+    grid-row: span 2;
+    resize: none;
+    height: 100%;
 }
 
 .form__checkbox-wrapper {
-  position: relative;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 10px;
+    border: 1px solid var(--input-border);
+    border-radius: 10px;
 }
 
 .form__checkbox-real {
-  appearance: none;
-  position: absolute;
+    appearance: none;
+    position: absolute;
 }
 
 .form__checkbox-real:focus ~ .form__checkbox-fake,
 .form__checkbox-real:focus ~ .form__label {
-  color: var(--secondary-color);
+    color: var(--primary-color);
 }
 
 .form__checkbox-real:checked ~ .form__checkbox-fake,
 .form__checkbox-real:checked ~ .form__label {
-  color: var(--primary-color);
+    color: var(--secondary-color);
 }
 
 .form__label {

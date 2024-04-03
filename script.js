@@ -4,6 +4,7 @@
 import { api } from './scripts/Api.js'
 import { Card } from './scripts/Card.js'
 import { Popup } from './scripts/Popup.js'
+import { PopupImage } from './scripts/PopupImage.js'
 import { MAX_LIVE_COOKIES, MAX_LIVE_STORAGE } from './scripts/constants.js'
 import { isTimeExpire, serializeForm, setDataRefreshCookies, setDataRefreshLocalStorage } from './scripts/utils.js'
 
@@ -14,10 +15,18 @@ const formLogin = document.querySelector('#popup-form-login')
 
 const btnOpenPopupForm = document.querySelector('#add-cat-form')
 const btnOpenPopupLogin = document.querySelector('#login-btn')
-const btnDeleteCard = document.querySelector('.card__delete')
+
+const popupLoginInstansce = new Popup('popup-login')
 
 const popupAddCatInstansce = new Popup('popup-add-cat')
-const popupLoginInstansce = new Popup('popup-login')
+popupAddCatInstansce.setEventListener()
+
+const popupCardInfoInstance = new Popup('popup-card-info')
+popupCardInfoInstance.setEventListener()
+
+const popupCardImageInstance = new PopupImage('popup-image')
+popupCardImageInstance.setEventListener()
+console.log(popupCardImageInstance)
 
 let isAuth = !!Cookies.get('email')
 /*  */
@@ -25,6 +34,10 @@ let isAuth = !!Cookies.get('email')
 /* Functions */
 
 //handlers
+function handleShowImageCard(dataCard) {
+    popupCardImageInstance.open(dataCard)
+    console.log(dataCard)
+}
 function handleAddFormCat(event) {
     const elementsFormCat = [...formAddCat.elements]
     const dataFromForm = serializeForm(elementsFormCat)
@@ -55,14 +68,24 @@ function handleLogOut() {
     popupLoginInstansce.open()
 }
 
-function handleDeleteItem(params) {
-    api.deleteById()
+function handleDeleteItem(id, data) {
+    api.deleteById(id)
     updateLocalStorage(data, { type: 'DELETE_CAT' })
+}
+
+function handleOpenEditorCard() {
+    popupCardInfoInstance.open()
 }
 //
 
-function createNewItem(newDataObj) {
-    const cardInstance = new Card(newDataObj, '#card-template')
+function createNewItem(dataFromForm) {
+    const cardInstance = new Card(
+        dataFromForm,
+        '#card-template',
+        handleDeleteItem,
+        handleOpenEditorCard,
+        handleShowImageCard
+    )
     const newCardElem = cardInstance.getElement()
     cardContainer.append(newCardElem)
 }
@@ -113,12 +136,8 @@ function setLoginBtnStyle() {
 /*  */
 
 /* Listeners */
-popupAddCatInstansce.setEventListener()
-// popupLoginInstansce.setEventListener()
-
 btnOpenPopupForm.addEventListener('click', () => popupAddCatInstansce.open())
 btnOpenPopupLogin.addEventListener('click', handleLogOut)
-// btnDeleteCard.addEventListener('click', handleDeleteItem)
 
 formAddCat.addEventListener('submit', handleAddFormCat)
 formLogin.addEventListener('submit', handleLoginForm)
@@ -129,7 +148,7 @@ formLogin.addEventListener('submit', handleLoginForm)
 if (!isAuth) {
     btnOpenPopupLogin.textContent = setLoginBtnStyle()
     popupLoginInstansce.open()
-    //!
+    //! Вызов приватного метода. Исправить
     document.removeEventListener('keyup', popupLoginInstansce._handleEscClose)
 } else {
     btnOpenPopupLogin.textContent = setLoginBtnStyle()

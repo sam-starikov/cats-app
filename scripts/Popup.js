@@ -13,7 +13,6 @@ export class Popup {
 
     open() {
         this.popup.classList.add('popup_active')
-        this.popup.querySelector('.form__input').focus()
         // сайд эффект
         document.addEventListener('keyup', this._handleEscClose)
     }

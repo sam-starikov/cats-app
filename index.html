@@ -4,22 +4,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nosifer&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100..800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js" defer></script>
-    <title>lorem-app</title>
+    <script src="https://kit.fontawesome.com/9f71191e8f.js" crossorigin="anonymous"></script>
+    <title>guitar-app</title>
 </head>
 
 
 <body class="page">
     <header class="header">
         <div class="header__container container">
-            <a href="#!" class="header__logo logo">lorem</a>
+            <a href="#!" class="header__logo logo">
+                GUITAR-APP
+            </a>
             <div class="header__controls">
-                <button class="btn" id="add-cat-form">Add item</button>
-                <button class="btn" id="login-btn"></button>
+                <button class="btn header__btn" id="add-cat-form">Add Guitar</button>
+                <button class="btn header__btn" id="login-btn"></button>
             </div>
         </div>
     </header>
@@ -43,46 +46,92 @@
     </footer>
     <div class="popup popup-add-cat">
         <div class="popup__container">
-            <button class="popup__btn btn">X</button>
-            <h2 class="popup__title">lorem</h2>
+            <button class="popup__btn btn"><i class="fa-solid fa-xmark"></i></button>
+            <h2 class="popup__title">Please add your Guitar</h2>
             <form method="post" class="form" id="popup-form-cat">
                 <!-- <div class="form__img"></div> -->
-                <input class="form__input" type="number" min="1" name="id" placeholder="id">
-                <input class="form__input" type="number" name="age" placeholder="Age">
+                <!-- <input class="form__input" type="number" min="1" name="id" placeholder="id"> -->
+                <input class="form__input" type="number" name="age" placeholder="Age" autofocus>
                 <input class="form__input" type="text" name="name" placeholder="Name" required>
                 <input class="form__input" type="number" min="0" max="10" name="rate" placeholder="Rating (0-10)">
                 <textarea class="form__input form__textarea" name="description" placeholder="Description"></textarea>
                 <label class="form__checkbox-wrapper">
                     <input class="form__checkbox-real" type="checkbox" name="favourite">
                     <span class="form__label">Favorite</span>
-                    <span class="form__checkbox-fake" aria-hidden="true">(icon)</span>
+                    <span class="form__checkbox-fake" aria-hidden="true"><i class="fa-solid fa-heart"></i></span>
                 </label>
                 <input class="form__input form__img-input" type="url" name="img_link" placeholder="URL to image"
                     required>
-                <button class="form__btn btn">Add to item</button>
+                <button class="form__btn btn">Ok</button>
             </form>
         </div>
     </div>
     <div class="popup popup-login">
         <div class="popup__container">
-            <button class="popup__btn btn" id="popup-login-close-btn">X</button>
             <h2 class="popup__title">Please enter your Login and Password</h2>
             <form class="form" id="popup-form-login">
-                <input class="form__input" type="email" name="email" placeholder="email" required>
+                <input class="form__input" type="email" name="email" placeholder="email" required autofocus>
                 <input class="form__input" type="password" name="password" minlength="6" placeholder="password"
                     required>
                 <button class="form__btn btn">Enter</button>
             </form>
         </div>
     </div>
+    <div class="popup popup-card-info">
+        <div class="popup__container">
+            <button class="popup__btn popup__btn_external btn"><i class="fa-solid fa-xmark"></i></button>
+            <div class="popup__content"></div>
+        </div>
+    </div>
+    <div class="popup popup-image">
+        <div class="popup__container">
+            <button class="popup__btn popup__btn_external btn"><i class="fa-solid fa-xmark"></i></button>
+            <div class="popup__img-wrap"><img class="popup__img" src="#!" alt="Изображение"></div>
+
+        </div>
+    </div>
     <template id="card-template">
         <div class="card">
-            <img class="card__img" src="" alt="Изображение">
+            <img class="card__img" src="#!" alt="Изображение">
             <a href="#!" class="card__link">
                 <h3 class="card__name"></h3>
             </a>
-            <button class="card__like" aria-label="Поставить лайк">like!</button>
-            <button class="card__delete" aria-label="Удалить">Delete!</button>
+            <button class="card__like" aria-label="Поставить лайк"><i class="fa-solid fa-heart"></i></button>
+            <button class="card__delete" aria-label="Удалить"><i class="fa-regular fa-trash-can"></i></button>
+        </div>
+    </template>
+
+    <template id="card-info-template">
+        <div class="card-info">
+            <button class="card-info__edit">
+                <i class="fa-regular fa-pen-to-square"></i>
+                Edit
+            </button>
+            <button class="card-info__save card-info__save_hidden">
+                <i class="fa-regular fa-floppy-disk"></i>
+                Save
+            </button>
+            <button class="card-info__delete">
+                <i class="fa-regular fa-trash-can"></i>
+                Delete
+            </button>
+
+            <img class="card-info__img" src="#!" alt="Изображение" loading="lazy">
+            <span class="card-info__id"></span>
+
+            <div class="card-info__title">
+                <h2 class="card-info__name"></h2>
+                <buttton class="card-info__favourite"><i class="fa-solid fa-heart"></i></buttton>
+            </div>
+
+            <span class="card-info__rate"></span>
+
+            <div class="card-info__age">
+                <div class="card-info__age-value"></div>
+                <div class="card-info__age-text"></div>
+            </div>
+
+            <p class="card-info__description"></p>
         </div>
     </template>
     <script src="./script.js" type="module"></script>

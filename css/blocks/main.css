@@ -1,4 +1,7 @@
 .main {
-  flex-grow: 1;
-  background-color: rgba(112, 162, 255, 0.041);
+    flex-grow: 1;
+    background-image: url('../../img/background2.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }

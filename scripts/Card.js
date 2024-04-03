@@ -1,7 +1,10 @@
 export class Card {
-    constructor(data, selectorTemplate) {
+    constructor(data, selectorTemplate, handleDeleteItem, handleOpenEditorCard, handleShowImageCard) {
         this._data = data
         this._selectorTemplate = selectorTemplate
+        this._handleDeleteItem = handleDeleteItem
+        this._handleOpenEditorCard = handleOpenEditorCard
+        this._handleShowImageCard = handleShowImageCard
     }
 
     _getTemplate() {
@@ -17,25 +20,46 @@ export class Card {
         //клонируем полученное содержимое
         this.element = this._getTemplate().cloneNode(true)
 
-        const cardTitle = this.element.querySelector('.card__name')
-        const cardImg = this.element.querySelector('.card__img')
+        this.cardTitle = this.element.querySelector('.card__name')
+        this.cardImg = this.element.querySelector('.card__img')
         const cardLike = this.element.querySelector('.card__like')
 
-        // this._data.favourite ? null : cardLike.remove()
         if (!this._data.favourite) {
             cardLike.remove()
         }
-        cardTitle.textContent = this._data.name
-        cardImg.src = this._data.img_link
+
+        this.cardTitle.textContent = this._data.name
+        this.cardImg.src = this._data.img_link
+
+        this.setEventListener()
 
         return this.element
     }
 
-    deleteElement(newDataObj) {
-        const deleteBtn = document.querySelector('.card__delete')
-        deleteBtn.addEventListener('click', () => {
-            this.element.remove()
+    getId() {
+        return this._data.id
+    }
+
+    getData() {
+        return this._data
+    }
+
+    deleteView() {
+        this.element.remove()
+        this.element = null
+    }
+
+    setEventListener() {
+        this.element.addEventListener('click', event => {
+            if (event.target.closest('.card__delete')) {
+                this.deleteView()
+                this._handleDeleteItem(this.getId(), this.getData())
+            }
         })
-        api.deleteById(newDataObj.id)
+
+        this.cardTitle.addEventListener('click', this._handleOpenEditorCard)
+        this.cardImg.addEventListener('click', () => {
+            this._handleShowImageCard(this._data)
+        })
     }
 }
