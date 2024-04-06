@@ -1,0 +1,62 @@
+.card-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 30px;
+    row-gap: 15px;
+    align-items: center;
+    justify-items: start;
+}
+
+.card-info__description {
+    grid-column: span 3;
+}
+
+.card-info__img {
+    aspect-ratio: 16/9;
+    object-fit: cover;
+}
+
+.card-info__id {
+    padding: 5px 20px;
+    background-color: var(--id-color);
+    color: #fff;
+    font-weight: 600;
+    border-radius: 10px;
+}
+
+.card-info__name,
+.card-info__age {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.card-info__age,
+.card-info__title {
+    display: flex;
+    column-gap: 10px;
+}
+
+.card-info__img-wrap {
+    grid-column: 1/3;
+    grid-row: 1/4;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.card-info__favourite {
+    display: flex;
+    align-items: center;
+    font-size: 22px;
+    color: var(--like-color);
+    cursor: pointer;
+}
+
+.card-info__rate {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 5px;
+    font-size: 20px;
+    color: var(--primary-color);
+    -webkit-text-stroke: 1px #000000;
+}

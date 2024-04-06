@@ -3,6 +3,7 @@
 /* Imports es6 module */
 import { api } from './scripts/Api.js'
 import { Card } from './scripts/Card.js'
+import { CardInfo } from './scripts/CardInfo.js'
 import { Popup } from './scripts/Popup.js'
 import { PopupImage } from './scripts/PopupImage.js'
 import { MAX_LIVE_COOKIES, MAX_LIVE_STORAGE } from './scripts/constants.js'
@@ -26,7 +27,9 @@ popupCardInfoInstance.setEventListener()
 
 const popupCardImageInstance = new PopupImage('popup-image')
 popupCardImageInstance.setEventListener()
-console.log(popupCardImageInstance)
+
+const cardInfoInstance = new CardInfo('#card-info-template', handleDeleteItem)
+const cardInfoElem = cardInfoInstance.getElement()
 
 let isAuth = !!Cookies.get('email')
 /*  */
@@ -36,7 +39,6 @@ let isAuth = !!Cookies.get('email')
 //handlers
 function handleShowImageCard(dataCard) {
     popupCardImageInstance.open(dataCard)
-    console.log(dataCard)
 }
 function handleAddFormCat(event) {
     const elementsFormCat = [...formAddCat.elements]
@@ -68,24 +70,24 @@ function handleLogOut() {
     popupLoginInstansce.open()
 }
 
-function handleDeleteItem(id, data) {
-    api.deleteById(id)
-    updateLocalStorage(data, { type: 'DELETE_CAT' })
+function handleDeleteItem(cardInstance) {
+    console.log(cardInstance)
+    api.deleteById(cardInstance.getId()).then(() => {
+        updateLocalStorage(cardInstance.getData(), { type: 'DELETE_CAT' })
+        cardInstance.deleteView()
+        popupCardInfoInstance.close()
+    })
 }
 
-function handleOpenEditorCard() {
+function handleOpenEditorCard(cardInstance) {
+    popupCardInfoInstance.setContent(cardInfoElem)
+    cardInfoInstance.setData(cardInstance)
     popupCardInfoInstance.open()
 }
 //
 
 function createNewItem(dataFromForm) {
-    const cardInstance = new Card(
-        dataFromForm,
-        '#card-template',
-        handleDeleteItem,
-        handleOpenEditorCard,
-        handleShowImageCard
-    )
+    const cardInstance = new Card(dataFromForm, '#card-template', handleOpenEditorCard, handleShowImageCard)
     const newCardElem = cardInstance.getElement()
     cardContainer.append(newCardElem)
 }

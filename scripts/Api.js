@@ -1,7 +1,4 @@
-const CONFIG_API = {
-    url: 'https://6492f092428c3d2035d0f278.mockapi.io',
-    headers: { 'content-type': 'application/json' },
-}
+import { CONFIG_API } from './constants.js'
 
 class Api {
     constructor(config) {
@@ -41,7 +38,7 @@ class Api {
     deleteById(id) {
         return fetch(`${this._url}/data/${id}`, {
             method: 'DELETE',
-        })
+        }).then(this._onResponse)
     }
 }
 

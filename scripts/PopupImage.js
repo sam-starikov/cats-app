@@ -5,6 +5,5 @@ export class PopupImage extends Popup {
         super.open()
         const cardImg = this.popup.querySelector('.popup__img')
         cardImg.src = dataCard.img_link
-        console.log(cardImg)
     }
 }

@@ -44,6 +44,8 @@
             </div>
         </div>
     </footer>
+
+    <!-- Popups -->
     <div class="popup popup-add-cat">
         <div class="popup__container">
             <button class="popup__btn btn"><i class="fa-solid fa-xmark"></i></button>
@@ -86,21 +88,21 @@
     <div class="popup popup-image">
         <div class="popup__container">
             <button class="popup__btn popup__btn_external btn"><i class="fa-solid fa-xmark"></i></button>
-            <div class="popup__img-wrap"><img class="popup__img" src="#!" alt="Изображение"></div>
-
+            <img class="popup__img" src="#!" alt="Изображение">
         </div>
     </div>
+
+    <!-- Templates -->
     <template id="card-template">
         <div class="card">
             <img class="card__img" src="#!" alt="Изображение">
-            <a href="#!" class="card__link">
+            <!-- <a href="#!" class="card__link">
                 <h3 class="card__name"></h3>
-            </a>
+            </a> -->
             <button class="card__like" aria-label="Поставить лайк"><i class="fa-solid fa-heart"></i></button>
-            <button class="card__delete" aria-label="Удалить"><i class="fa-regular fa-trash-can"></i></button>
+            <button class="card__edit" aria-label="Редактировать"><i class="fa-regular fa-pen-to-square"></i></button>
         </div>
     </template>
-
     <template id="card-info-template">
         <div class="card-info">
             <button class="card-info__edit">
@@ -115,23 +117,20 @@
                 <i class="fa-regular fa-trash-can"></i>
                 Delete
             </button>
-
-            <img class="card-info__img" src="#!" alt="Изображение" loading="lazy">
+            <div class="card-info__img-wrap">
+                <img class="card-info__img" src="#!" alt="Изображение" loading="lazy">
+            </div>
             <span class="card-info__id"></span>
-
             <div class="card-info__title">
                 <h2 class="card-info__name"></h2>
                 <buttton class="card-info__favourite"><i class="fa-solid fa-heart"></i></buttton>
             </div>
-
             <span class="card-info__rate"></span>
-
             <div class="card-info__age">
                 <div class="card-info__age-value"></div>
                 <div class="card-info__age-text"></div>
             </div>
-
-            <p class="card-info__description"></p>
+            <p class="card-info__description" contenteditable></p>
         </div>
     </template>
     <script src="./script.js" type="module"></script>

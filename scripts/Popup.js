@@ -23,6 +23,12 @@ export class Popup {
         document.removeEventListener('keyup', this._handleEscClose)
     }
 
+    setContent(contentNode) {
+        const contentContainer = this.popup.querySelector('.popup__content')
+        contentContainer.innerHTML = null
+        contentContainer.append(contentNode)
+    }
+
     setEventListener() {
         this.popup.addEventListener('click', event => {
             if (event.target.classList.contains('popup') || !!event.target.closest('.popup__btn')) {
