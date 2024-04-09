@@ -2,7 +2,6 @@ export class Card {
     constructor(data, selectorTemplate, handleOpenEditorCard, handleShowImageCard) {
         this._data = data
         this._selectorTemplate = selectorTemplate
-
         this._handleOpenEditorCard = handleOpenEditorCard
         this._handleShowImageCard = handleShowImageCard
     }

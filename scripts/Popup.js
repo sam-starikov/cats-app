@@ -1,8 +1,11 @@
 export class Popup {
     constructor(className) {
+        // Принимаем в конструктор class нашего popoup из разметки (строка)
+        //  Ищем его записывваем в this.popup
+
         this._className = `.${className}`
         this.popup = document.querySelector(this._className)
-        this._handleEscClose = this._handleEscClose.bind(this)
+        this._handleEscClose = this._handleEscClose.bind(this) // биндем this именно для этого Класса
     }
 
     _handleEscClose(event) {
@@ -24,9 +27,9 @@ export class Popup {
     }
 
     setContent(contentNode) {
-        const contentContainer = this.popup.querySelector('.popup__content')
-        contentContainer.innerHTML = null
-        contentContainer.append(contentNode)
+        const contentContainer = this.popup.querySelector('.popup__content') // ищем ноду куда будем встраивать карточку
+        contentContainer.innerHTML = null // при каждом вызове очищаем ??
+        contentContainer.append(contentNode) // встраиваем карточку которую получили в popup
     }
 
     setEventListener() {

@@ -10,10 +10,11 @@
     background-color: var(--popup-overlay-bg);
     visibility: hidden;
     opacity: 0;
-    transition: opacity 0.2s ease-in-out;
+    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
 }
 
 .popup_active {
+    transform: scale(1);
     opacity: 1;
     visibility: visible;
     transition: opacity 0.2s ease-in-out;

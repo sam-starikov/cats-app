@@ -1,13 +1,19 @@
 //клиентский код
 
 /* Imports es6 module */
-import { api } from './scripts/Api.js'
+import { Api } from './scripts/Api.js'
 import { Card } from './scripts/Card.js'
 import { CardInfo } from './scripts/CardInfo.js'
 import { Popup } from './scripts/Popup.js'
 import { PopupImage } from './scripts/PopupImage.js'
-import { MAX_LIVE_COOKIES, MAX_LIVE_STORAGE } from './scripts/constants.js'
-import { isTimeExpire, serializeForm, setDataRefreshCookies, setDataRefreshLocalStorage } from './scripts/utils.js'
+import { CONFIG_API, MAX_LIVE_COOKIES, MAX_LIVE_STORAGE } from './scripts/constants.js'
+import {
+    convertToJSON,
+    isTimeExpire,
+    serializeForm,
+    setDataRefreshCookies,
+    setDataRefreshLocalStorage,
+} from './scripts/utils.js'
 
 /* Variables */
 const cardContainer = document.querySelector('.cards')
@@ -17,19 +23,26 @@ const formLogin = document.querySelector('#popup-form-login')
 const btnOpenPopupForm = document.querySelector('#add-cat-form')
 const btnOpenPopupLogin = document.querySelector('#login-btn')
 
-const popupLoginInstansce = new Popup('popup-login')
+/* Classes */
+const api = new Api(CONFIG_API) //передаем данные в конструктор
 
-const popupAddCatInstansce = new Popup('popup-add-cat')
-popupAddCatInstansce.setEventListener()
+console.log(api)
 
-const popupCardInfoInstance = new Popup('popup-card-info')
+const popupLoginInstansce = new Popup('popup-login') //передаем данные в конструктор
+
+console.log(popupLoginInstansce)
+
+const popupAddCatInstansce = new Popup('popup-add-cat') //передаем данные в конструктор
+popupAddCatInstansce.setEventListener() // вызываем метод установки слушателей
+
+const popupCardInfoInstance = new Popup('popup-card-info') //передаем данные в конструктор
 popupCardInfoInstance.setEventListener()
 
-const popupCardImageInstance = new PopupImage('popup-image')
+const popupCardImageInstance = new PopupImage('popup-image') //передаем данные в конструктор
 popupCardImageInstance.setEventListener()
 
-const cardInfoInstance = new CardInfo('#card-info-template', handleDeleteItem)
-const cardInfoElem = cardInfoInstance.getElement()
+const cardInfoInstance = new CardInfo('#card-info-template', handleDeleteItem) //передаем данные в конструктор
+const cardInfoElem = cardInfoInstance.getElement() // записываем в переменную то что нам вернул метод getElement т.е. карточку
 
 let isAuth = !!Cookies.get('email')
 /*  */
@@ -115,17 +128,17 @@ function updateLocalStorage(data, action) {
 
     switch (action.type) {
         case 'ALL_CATS':
-            localStorage.setItem('cats', JSON.stringify(data))
+            localStorage.setItem('cats', convertToJSON(data))
             setDataRefreshLocalStorage(MAX_LIVE_STORAGE, 'catsRefreshData')
             break
         case 'ADD_CAT':
             storage.push(data)
-            localStorage.setItem('cats', JSON.stringify(storage))
+            localStorage.setItem('cats', convertToJSON(storage))
             break
 
         case 'DELETE_CAT':
             const filteredStorage = storage.filter(el => el.id !== data.id)
-            localStorage.setItem('cats', JSON.stringify(filteredStorage))
+            localStorage.setItem('cats', convertToJSON(filteredStorage))
 
         default:
             break

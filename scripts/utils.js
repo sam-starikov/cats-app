@@ -38,9 +38,10 @@ export const normalizeCount = (number, words_arr) => {
 }
 
 export function generateRate(rate) {
+    const roundRate = Math.round(rate)
     const rateArr = []
     for (let i = 0; i < MAX_RATE; i++) {
-        if (i < rate) {
+        if (i < roundRate) {
             rateArr.push('<i class="fa-solid fa-star"></i>')
         } else {
             rateArr.push('<i class="fa-regular fa-star"></i>')
@@ -53,3 +54,7 @@ export function generateRate(rate) {
 ;('<i class="fa-solid fa-star"></i>')
 ;('<i class="fa-regular fa-star"></i>')
 ;('<i class="fa-solid fa-star-half-stroke"></i>')
+
+export function convertToJSON(data) {
+    return JSON.stringify(data)
+}

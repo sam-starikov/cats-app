@@ -9,6 +9,13 @@ export class CardInfo {
         this._data = {}
     }
 
+    _toggleContentEditable() {
+        this.btnEdit.classList.toggle('card-info__edit_hidden')
+        this.btnSave.classList.toggle('card-info__save_hidden')
+        this.cardDesc.contentEditable = !this.cardDesc.isContentEditable
+        console.log(this)
+    }
+
     setData(cardInstance) {
         this._cardInstance = cardInstance
         this._data = this._cardInstance.getData()
@@ -29,8 +36,10 @@ export class CardInfo {
     }
 
     getElement() {
-        this.element = this._getTemplate().cloneNode(true)
+        /* Тут получаем элементы из разметки, карточки информации */
+        this.element = this._getTemplate().cloneNode(true) // Запиисываем в переменную  this.element то, что получили из шаблона template методом content с глубоким копирование cloneNode(true) т.е. саму карточку.
 
+        //Ищем в карточке отдельные элементы которые нужны
         this.btnEdit = this.element.querySelector('.card-info__edit')
         this.btnSave = this.element.querySelector('.card-info__save')
         this.btnDelete = this.element.querySelector('.card-info__delete')
@@ -52,5 +61,6 @@ export class CardInfo {
 
     setEventListener() {
         this.btnDelete.addEventListener('click', () => this._handleDeleteItem(this._cardInstance))
+        this.btnEdit.addEventListener('click', () => this._toggleContentEditable())
     }
 }
