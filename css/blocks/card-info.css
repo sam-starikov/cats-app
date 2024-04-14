@@ -76,7 +76,7 @@
 }
 
 .card-info__delete:hover {
-    color: var(--delete-btn-color);
+    color: var(--warning-color);
     font-weight: 900;
 }
 

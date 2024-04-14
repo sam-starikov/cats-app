@@ -17,7 +17,7 @@ import {
 
 /* Variables */
 const cardContainer = document.querySelector('.cards')
-const formAddCat = document.querySelector('#popup-form-cat')
+const formAddCat = document.querySelector('#popup-form-wish')
 const formLogin = document.querySelector('#popup-form-login')
 
 const btnOpenPopupForm = document.querySelector('#add-cat-form')
@@ -28,7 +28,7 @@ const api = new Api(CONFIG_API) //передаем данные в констр�
 
 const popupLoginInstansce = new Popup('popup-login') //передаем данные в конструктор
 
-const popupAddCatInstansce = new Popup('popup-add-cat') //передаем данные в конструктор
+const popupAddCatInstansce = new Popup('popup-add-wish') //передаем данные в конструктор
 popupAddCatInstansce.setEventListener() // вызываем метод установки слушателей
 
 const popupCardInfoInstance = new Popup('popup-card-info') //передаем данные в конструктор

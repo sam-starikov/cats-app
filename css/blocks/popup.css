@@ -28,7 +28,7 @@
     width: 100%;
     padding: 20px;
     border-radius: 10px;
-    background-color: var(--form-color);
+    background-color: var(--white);
 }
 
 .popup__btn {

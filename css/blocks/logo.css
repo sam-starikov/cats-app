@@ -1,4 +1,6 @@
 .logo {
     font-size: 22px;
+    font-weight: 300;
     text-transform: uppercase;
+    cursor: default;
 }

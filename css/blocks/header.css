@@ -18,3 +18,8 @@
 .header__btn {
     text-transform: uppercase;
 }
+
+#login-btn:hover {
+    background-color: var(--warning-color);
+    color: var(--white);
+}
