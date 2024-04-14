@@ -6,3 +6,4 @@ export const CONFIG_API = {
     url: 'https://6492f092428c3d2035d0f278.mockapi.io',
     headers: { 'content-type': 'application/json' },
 }
+export const CORRECT_DECLENSIONS = ['год', 'года', 'лет']

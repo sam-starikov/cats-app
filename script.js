@@ -12,7 +12,7 @@ import {
     isTimeExpire,
     serializeForm,
     setDataRefreshCookies,
-    setDataRefreshLocalStorage,
+    setDateRefreshLocalStorage,
 } from './scripts/utils.js'
 
 /* Variables */
@@ -26,11 +26,7 @@ const btnOpenPopupLogin = document.querySelector('#login-btn')
 /* Classes */
 const api = new Api(CONFIG_API) //передаем данные в конструктор
 
-console.log(api)
-
 const popupLoginInstansce = new Popup('popup-login') //передаем данные в конструктор
-
-console.log(popupLoginInstansce)
 
 const popupAddCatInstansce = new Popup('popup-add-cat') //передаем данные в конструктор
 popupAddCatInstansce.setEventListener() // вызываем метод установки слушателей
@@ -43,6 +39,8 @@ popupCardImageInstance.setEventListener()
 
 const cardInfoInstance = new CardInfo('#card-info-template', handleDeleteItem) //передаем данные в конструктор
 const cardInfoElem = cardInfoInstance.getElement() // записываем в переменную то что нам вернул метод getElement т.е. карточку
+
+console.log(cardInfoElem)
 
 let isAuth = !!Cookies.get('email')
 /*  */
@@ -124,21 +122,21 @@ function checkLocalStorage() {
 }
 
 function updateLocalStorage(data, action) {
-    const storage = JSON.parse(localStorage.getItem('cats'))
+    const storage = JSON.parse(localStorage.getItem('wish-list'))
 
     switch (action.type) {
         case 'ALL_CATS':
-            localStorage.setItem('cats', convertToJSON(data))
-            setDataRefreshLocalStorage(MAX_LIVE_STORAGE, 'catsRefreshData')
+            localStorage.setItem('wish-list', convertToJSON(data))
+            setDateRefreshLocalStorage(MAX_LIVE_STORAGE, 'storage-refresh-date')
             break
         case 'ADD_CAT':
             storage.push(data)
-            localStorage.setItem('cats', convertToJSON(storage))
+            localStorage.setItem('wish-list', convertToJSON(storage))
             break
 
         case 'DELETE_CAT':
             const filteredStorage = storage.filter(el => el.id !== data.id)
-            localStorage.setItem('cats', convertToJSON(filteredStorage))
+            localStorage.setItem('wish-list', convertToJSON(filteredStorage))
 
         default:
             break
@@ -163,6 +161,7 @@ formLogin.addEventListener('submit', handleLoginForm)
 if (!isAuth) {
     btnOpenPopupLogin.textContent = setLoginBtnStyle()
     popupLoginInstansce.open()
+
     //! Вызов приватного метода. Исправить
     document.removeEventListener('keyup', popupLoginInstansce._handleEscClose)
 } else {

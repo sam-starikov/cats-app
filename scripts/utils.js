@@ -23,7 +23,7 @@ export function setDataRefreshCookies(minutes) {
     return setTime
 }
 
-export function setDataRefreshLocalStorage(minutes, key) {
+export function setDateRefreshLocalStorage(minutes, key) {
     const setTime = new Date(new Date().getTime() + minutes * MILLISECONDS_PER_MINUTE)
     localStorage.setItem(key, setTime)
 }
@@ -50,10 +50,6 @@ export function generateRate(rate) {
 
     return rateArr.join('')
 }
-
-;('<i class="fa-solid fa-star"></i>')
-;('<i class="fa-regular fa-star"></i>')
-;('<i class="fa-solid fa-star-half-stroke"></i>')
 
 export function convertToJSON(data) {
     return JSON.stringify(data)

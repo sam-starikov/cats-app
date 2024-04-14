@@ -7,29 +7,24 @@ export class Card {
     }
 
     _getTemplate() {
-        //приватный - вызывается внутри класса
-
         //возвр. содержимое шаблона в виде DOM узла
         return document.querySelector(this._selectorTemplate).content.querySelector('.card')
     }
 
     getElement() {
-        // публичный - вызывается снаружи
-
         //клонируем полученное содержимое
         this.element = this._getTemplate().cloneNode(true)
 
         this.cardTitle = this.element.querySelector('.card__name')
         this.cardImg = this.element.querySelector('.card__img')
-        const cardLike = this.element.querySelector('.card__like')
-        this.editBtn = this.element.querySelector('.card__edit')
+        this.cardLike = this.element.querySelector('.card__like')
+        this.infoBtn = this.element.querySelector('.card__info')
+
+        this.cardImg.src = this._data.img_link
 
         if (!this._data.favourite) {
-            cardLike.remove()
+            this.cardLike.remove()
         }
-
-        // this.cardTitle.textContent = this._data.name
-        this.cardImg.src = this._data.img_link
 
         this.setEventListener()
 
@@ -50,14 +45,7 @@ export class Card {
     }
 
     setEventListener() {
-        // this.element.addEventListener('click', event => {
-        //     if (event.target.closest('.card__delete')) {
-        //         this.deleteView()
-        //         this._handleDeleteItem(this.getId(), this.getData())
-        //     }
-        // })
-
-        this.editBtn.addEventListener('click', () => this._handleOpenEditorCard(this))
+        this.infoBtn.addEventListener('click', () => this._handleOpenEditorCard(this))
         this.cardImg.addEventListener('click', () => {
             this._handleShowImageCard(this._data)
         })
