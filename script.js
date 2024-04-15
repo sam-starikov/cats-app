@@ -23,6 +23,19 @@ const formLogin = document.querySelector('#popup-form-login')
 const btnOpenPopupForm = document.querySelector('#add-cat-form')
 const btnOpenPopupLogin = document.querySelector('#login-btn')
 
+const burgerMenu = document.querySelector('.burger')
+
+burgerMenu.addEventListener('click', () => {
+    const headerControls = document.querySelector('.header__controls')
+    const headerLogo = document.querySelector('.header__logo')
+    const headerPlate = document.querySelector('.header')
+    headerControls.classList.toggle('active')
+    burgerMenu.classList.toggle('active')
+    headerLogo.classList.toggle('active')
+    headerPlate.classList.toggle('active')
+    document.body.classList.toggle('lock')
+})
+
 /* Classes */
 const api = new Api(CONFIG_API) //передаем данные в конструктор
 

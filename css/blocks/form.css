@@ -63,3 +63,16 @@
 
 .form__btn {
 }
+
+/* MEDIA */
+
+@media (max-width: 549px) {
+    .form {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .form__input {
+        padding: 8px;
+    }
+}

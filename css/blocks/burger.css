@@ -1,8 +1,10 @@
 .burger {
+    display: none;
     position: relative;
     width: 35px;
     height: 19px;
     cursor: pointer;
+    z-index: 60;
 }
 
 .burger__line {
@@ -32,4 +34,18 @@
 
 .burger::before {
     top: 0;
+}
+
+/* MEDIA */
+
+@media (max-width: 549px) {
+    .burger {
+        display: block;
+    }
+
+    .burger.active span,
+    .burger.active::after,
+    .burger.active::before {
+        background-color: var(--white);
+    }
 }
