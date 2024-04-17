@@ -14,8 +14,8 @@ export function serializeForm(elements) {
     return formData
 }
 
-export function isTimeExpire(localStorageTimeData) {
-    return new Date() < new Date(localStorageTimeData)
+export function isTimeExpire(localStorageTimeDate) {
+    return new Date() < new Date(localStorageTimeDate)
 }
 
 export function setDataRefreshCookies(minutes) {

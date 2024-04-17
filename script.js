@@ -19,48 +19,30 @@ import {
 const cardContainer = document.querySelector('.cards')
 const formAddCat = document.querySelector('#popup-form-wish')
 const formLogin = document.querySelector('#popup-form-login')
-
 const btnOpenPopupForm = document.querySelector('#add-cat-form')
 const btnOpenPopupLogin = document.querySelector('#login-btn')
-
 const burgerMenu = document.querySelector('.burger')
 
-burgerMenu.addEventListener('click', () => {
-    const headerControls = document.querySelector('.header__controls')
-    const headerLogo = document.querySelector('.header__logo')
-    const headerPlate = document.querySelector('.header')
-    headerControls.classList.toggle('active')
-    burgerMenu.classList.toggle('active')
-    headerLogo.classList.toggle('active')
-    headerPlate.classList.toggle('active')
-    document.body.classList.toggle('lock')
-})
+let isAuth = !!Cookies.get('email')
 
 /* Classes */
-const api = new Api(CONFIG_API) //передаем данные в конструктор
+const api = new Api(CONFIG_API)
 
-const popupLoginInstansce = new Popup('popup-login') //передаем данные в конструктор
+const popupLoginInstansce = new Popup('popup-login')
 
-const popupAddCatInstansce = new Popup('popup-add-wish') //передаем данные в конструктор
-popupAddCatInstansce.setEventListener() // вызываем метод установки слушателей
+const popupAddCatInstansce = new Popup('popup-add-wish')
+popupAddCatInstansce.setEventListener()
 
-const popupCardInfoInstance = new Popup('popup-card-info') //передаем данные в конструктор
+const popupCardInfoInstance = new Popup('popup-card-info')
 popupCardInfoInstance.setEventListener()
 
-const popupCardImageInstance = new PopupImage('popup-image') //передаем данные в конструктор
+const popupCardImageInstance = new PopupImage('popup-image')
 popupCardImageInstance.setEventListener()
 
-const cardInfoInstance = new CardInfo('#card-info-template', handleDeleteItem) //передаем данные в конструктор
-const cardInfoElem = cardInfoInstance.getElement() // записываем в переменную то что нам вернул метод getElement т.е. карточку
-
-console.log(cardInfoElem)
-
-let isAuth = !!Cookies.get('email')
-/*  */
+const cardInfoInstance = new CardInfo('#card-info-template', handleDeleteItem, handleEditInfoCard, handleLike)
+const cardInfoElem = cardInfoInstance.getElement()
 
 /* Functions */
-
-//handlers
 function handleShowImageCard(dataCard) {
     popupCardImageInstance.open(dataCard)
 }
@@ -68,7 +50,7 @@ function handleAddFormCat(event) {
     const elementsFormCat = [...formAddCat.elements]
     const dataFromForm = serializeForm(elementsFormCat)
     api.addNewObj(dataFromForm).then(() => {
-        createNewItem(dataFromForm)
+        createNewCard(dataFromForm)
         updateLocalStorage(dataFromForm, { type: 'ADD_CAT' })
         popupAddCatInstansce.close()
     })
@@ -95,7 +77,6 @@ function handleLogOut() {
 }
 
 function handleDeleteItem(cardInstance) {
-    console.log(cardInstance)
     api.deleteById(cardInstance.getId()).then(() => {
         updateLocalStorage(cardInstance.getData(), { type: 'DELETE_CAT' })
         cardInstance.deleteView()
@@ -108,26 +89,44 @@ function handleOpenEditorCard(cardInstance) {
     cardInfoInstance.setData(cardInstance)
     popupCardInfoInstance.open()
 }
-//
 
-function createNewItem(dataFromForm) {
-    const cardInstance = new Card(dataFromForm, '#card-template', handleOpenEditorCard, handleShowImageCard)
+function handleEditInfoCard(cardInstance, editedData) {
+    const { id, name, description } = editedData
+    api.updateById(id, { name, description }).then(() => {
+        cardInstance.setNewData(editedData)
+        cardInstance.updateView()
+        popupCardInfoInstance.close()
+        updateLocalStorage(editedData, { type: 'EDITED_DATA' })
+    })
+}
+
+function handleLike(cardInstance, editedData) {
+    const { id, favourite } = editedData
+    api.updateById(id, { favourite }).then(() => {
+        cardInstance.setNewData(editedData)
+        cardInstance.updateView()
+        updateLocalStorage(editedData, { type: 'EDITED_DATA' })
+    })
+}
+
+function createNewCard(data) {
+    const cardInstance = new Card(data, '#card-template', handleOpenEditorCard, handleShowImageCard)
     const newCardElem = cardInstance.getElement()
     cardContainer.append(newCardElem)
 }
 
 function checkLocalStorage() {
-    const dataLocalStorage = JSON.parse(localStorage.getItem('cats'))
-    const getTimeExpires = localStorage.getItem('catsRefreshData')
+    const dataLocalStorage = JSON.parse(localStorage.getItem('wish-list-data'))
+    const getTimeExpires = localStorage.getItem('storage-refresh-date')
 
     if (dataLocalStorage && dataLocalStorage.length && isTimeExpire(getTimeExpires)) {
         dataLocalStorage.forEach(obj => {
-            createNewItem(obj)
+            createNewCard(obj)
         })
     } else {
         api.getAllData().then(data => {
             data.forEach(obj => {
-                createNewItem(obj)
+                createNewCard(obj)
             })
             updateLocalStorage(data, { type: 'ALL_CATS' })
         })
@@ -135,31 +134,33 @@ function checkLocalStorage() {
 }
 
 function updateLocalStorage(data, action) {
-    const storage = JSON.parse(localStorage.getItem('wish-list'))
+    const storage = JSON.parse(localStorage.getItem('wish-list-data'))
 
     switch (action.type) {
         case 'ALL_CATS':
-            localStorage.setItem('wish-list', convertToJSON(data))
+            localStorage.setItem('wish-list-data', convertToJSON(data))
             setDateRefreshLocalStorage(MAX_LIVE_STORAGE, 'storage-refresh-date')
-            break
+            return
         case 'ADD_CAT':
             storage.push(data)
-            localStorage.setItem('wish-list', convertToJSON(storage))
-            break
-
+            localStorage.setItem('wish-list-data', convertToJSON(storage))
+            return
+        case 'EDITED_DATA':
+            const updateStorage = storage.map(el => (el.id === data.id ? data : el))
+            localStorage.setItem('wish-list-data', convertToJSON(updateStorage))
+            return
         case 'DELETE_CAT':
             const filteredStorage = storage.filter(el => el.id !== data.id)
-            localStorage.setItem('wish-list', convertToJSON(filteredStorage))
+            localStorage.setItem('wish-list-data', convertToJSON(filteredStorage))
 
         default:
-            break
+            return
     }
 }
 
 function setLoginBtnStyle() {
     return !isAuth ? 'Sign in' : 'Sign Out'
 }
-/*  */
 
 /* Listeners */
 btnOpenPopupForm.addEventListener('click', () => popupAddCatInstansce.open())
@@ -167,8 +168,17 @@ btnOpenPopupLogin.addEventListener('click', handleLogOut)
 
 formAddCat.addEventListener('submit', handleAddFormCat)
 formLogin.addEventListener('submit', handleLoginForm)
-// Важно, submit на Форму а не click на кнопку
-/*  */
+
+burgerMenu.addEventListener('click', () => {
+    const headerControls = document.querySelector('.header__controls')
+    const headerLogo = document.querySelector('.header__logo')
+    const headerPlate = document.querySelector('.header')
+    headerControls.classList.toggle('active')
+    burgerMenu.classList.toggle('active')
+    headerLogo.classList.toggle('active')
+    headerPlate.classList.toggle('active')
+    document.body.classList.toggle('lock')
+})
 
 /* Authorization */
 if (!isAuth) {
@@ -181,4 +191,3 @@ if (!isAuth) {
     btnOpenPopupLogin.textContent = setLoginBtnStyle()
     checkLocalStorage()
 }
-/*  */

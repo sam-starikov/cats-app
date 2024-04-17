@@ -28,7 +28,7 @@ export class Api {
     }
 
     updateById(id, data) {
-        fetch(`${this._url}/data/${id}`, {
+        return fetch(`${this._url}/data/${id}`, {
             method: 'PUT',
             headers: this._headers,
             body: convertToJSON(data),

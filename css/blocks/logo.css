@@ -1,6 +1,8 @@
 .logo {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 200;
+    font-style: italic;
     font-size: 22px;
-    font-weight: 300;
     text-transform: uppercase;
     cursor: default;
 }

@@ -8,13 +8,19 @@
 }
 
 .card-info__description {
-    padding: 5px;
+    width: 100%;
     grid-column: span 3;
-    border-radius: 10px;
+}
+
+.card-info__name,
+.card-info__description {
     transition: box-shadow var(--fast), background-color var(--fast), padding var(--fast);
 }
 
-.card-info__description[contenteditable='true'] {
+.card-info__description[contenteditable='true'],
+.card-info__name[contenteditable='true'] {
+    padding: 5px;
+    border-radius: 10px;
     box-shadow: 0 0 1px 1px var(--accent-color);
     background-color: aliceblue;
 }
@@ -57,8 +63,18 @@
     display: flex;
     align-items: center;
     font-size: 22px;
-    color: var(--like-color);
+    color: grey;
     cursor: pointer;
+    transition: color var(--fast);
+}
+
+.card-info__favourite:hover {
+    color: var(--like-color);
+    transition: color 0s;
+}
+
+.card-info__favourite_active {
+    color: var(--like-color);
 }
 
 .card-info__rate {

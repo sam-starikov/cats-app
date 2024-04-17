@@ -27,9 +27,9 @@ export class Popup {
     }
 
     setContent(contentNode) {
-        const contentContainer = this.popup.querySelector('.popup__content') // ищем ноду куда будем встраивать карточку
-        contentContainer.innerHTML = null // при каждом вызове очищаем ??
-        contentContainer.append(contentNode) // встраиваем карточку которую получили в popup
+        this.contentContainer = this.popup.querySelector('.popup__content')
+        this.contentContainer.innerHTML = null // ?
+        this.contentContainer.append(contentNode)
     }
 
     setEventListener() {

@@ -14,21 +14,28 @@ export class Card {
     getElement() {
         //клонируем полученное содержимое
         this.element = this._getTemplate().cloneNode(true)
-
-        this.cardTitle = this.element.querySelector('.card__name')
         this.cardImg = this.element.querySelector('.card__img')
         this.cardLike = this.element.querySelector('.card__like')
         this.infoBtn = this.element.querySelector('.card__info')
+        this.cardName = this.element.querySelector('.card__name')
 
-        this.cardImg.src = this._data.img_link
-
-        if (!this._data.favourite) {
-            this.cardLike.remove()
+        if (this._data.favourite) {
+            this.cardLike.classList.add('card__like_active')
         }
 
+        this.updateView()
         this.setEventListener()
 
         return this.element
+    }
+
+    updateView() {
+        this.cardImg.src = this._data.img_link
+        // this.cardLike
+    }
+
+    setNewData(editedData) {
+        this._data = editedData
     }
 
     getId() {
