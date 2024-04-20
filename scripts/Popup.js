@@ -1,8 +1,5 @@
 export class Popup {
     constructor(className) {
-        // Принимаем в конструктор class нашего popoup из разметки (строка)
-        //  Ищем его записывваем в this.popup
-
         this._className = `.${className}`
         this.popup = document.querySelector(this._className)
         this._handleEscClose = this._handleEscClose.bind(this) // биндем this именно для этого Класса

@@ -39,7 +39,13 @@ popupCardInfoInstance.setEventListener()
 const popupCardImageInstance = new PopupImage('popup-image')
 popupCardImageInstance.setEventListener()
 
-const cardInfoInstance = new CardInfo('#card-info-template', handleDeleteItem, handleEditInfoCard, handleLike)
+const cardInfoInstance = new CardInfo(
+    '#card-info-template',
+    handleDeleteItem,
+    handleEditInfoCard,
+    handleLike,
+    handleShowImageCard
+)
 const cardInfoElem = cardInfoInstance.getElement()
 
 /* Functions */
@@ -94,7 +100,6 @@ function handleEditInfoCard(cardInstance, editedData) {
     const { id, name, description } = editedData
     api.updateById(id, { name, description }).then(() => {
         cardInstance.setNewData(editedData)
-        cardInstance.updateView()
         popupCardInfoInstance.close()
         updateLocalStorage(editedData, { type: 'EDITED_DATA' })
     })
@@ -104,13 +109,12 @@ function handleLike(cardInstance, editedData) {
     const { id, favourite } = editedData
     api.updateById(id, { favourite }).then(() => {
         cardInstance.setNewData(editedData)
-        cardInstance.updateView()
         updateLocalStorage(editedData, { type: 'EDITED_DATA' })
     })
 }
 
 function createNewCard(data) {
-    const cardInstance = new Card(data, '#card-template', handleOpenEditorCard, handleShowImageCard)
+    const cardInstance = new Card(data, '#card-template', handleOpenEditorCard, handleShowImageCard, handleLike)
     const newCardElem = cardInstance.getElement()
     cardContainer.append(newCardElem)
 }
@@ -152,7 +156,7 @@ function updateLocalStorage(data, action) {
         case 'DELETE_CAT':
             const filteredStorage = storage.filter(el => el.id !== data.id)
             localStorage.setItem('wish-list-data', convertToJSON(filteredStorage))
-
+            return
         default:
             return
     }

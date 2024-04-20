@@ -66,18 +66,18 @@
     transition: color var(--fast), transform var(--fast);
 }
 
-.card__like:hover {
+/* .card__like:hover {
     color: rgba(197, 0, 23, 0.9);
     transform: scale(1.1);
-}
+} */
 
 .card__like_active {
     color: rgba(197, 0, 23, 0.9);
 }
 
-.card__like_active:hover {
+/* .card__like_active:hover {
     color: rgba(128, 128, 128, 0.9);
-}
+} */
 
 .card__info {
     position: absolute;

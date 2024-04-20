@@ -2,11 +2,12 @@ import { CORRECT_DECLENSIONS } from './constants.js'
 import { normalizeCount, generateRate } from './utils.js'
 
 export class CardInfo {
-    constructor(selectorTemplate, handleDeleteItem, handleEditInfoCard, handleLike) {
+    constructor(selectorTemplate, handleDeleteItem, handleEditInfoCard, handleLike, handleShowImageCard) {
         this._selectorTemplate = selectorTemplate
         this._handleDeleteItem = handleDeleteItem
         this._handleEditInfoCard = handleEditInfoCard
         this._handleLike = handleLike
+        this._handleShowImageCard = handleShowImageCard
         this._data = {}
     }
 
@@ -105,5 +106,9 @@ export class CardInfo {
         this.btnSave.addEventListener('click', this._saveEditData)
 
         this.btnLike.addEventListener('click', this._setLike)
+
+        this.cardImg.addEventListener('click', () => {
+            this._handleShowImageCard(this._data)
+        })
     }
 }

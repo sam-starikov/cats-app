@@ -57,6 +57,7 @@
     border-radius: 10px;
     overflow: hidden;
     box-shadow: var(--shadow);
+    cursor: pointer;
 }
 
 .card-info__favourite {
@@ -68,10 +69,10 @@
     transition: color var(--fast);
 }
 
-.card-info__favourite:hover {
+/* .card-info__favourite:hover {
     color: var(--like-color);
     transition: color 0s;
-}
+} */
 
 .card-info__favourite_active {
     color: var(--like-color);
